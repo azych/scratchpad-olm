@@ -1,0 +1,30 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/part-of: olm
+  name: olm-metrics-monitor
+  namespace: olmv1-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - endpoints
+  verbs:
+  - list
+  - watch
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - list
+  - watch
+  - get
+#The Role "olm-metrics-monitor" is invalid: rules[2].nonResourceURLs: Invalid value: []string{"/metrics"}: namespaced rules cannot apply to non-resource URLs
+# - nonResourceURLs:
+#   - /metrics
+#   verbs:
+#   - get
